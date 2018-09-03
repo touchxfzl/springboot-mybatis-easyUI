@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+
+		<!--拖拽放置style-->
+		<style type="text/css">
+			.drags {
+				width: 50px;
+				height: 50px;
+				margin: 5px;
+				border: 1px solid #ccc;
+			}
+			
+			.container,
+			#drop {
+				width: 300px;
+				height: 300px;
+				border: 1px solid #ccc;
+				float: left;
+				margin: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		整个div方式一：添加easyUI的控件class类
+		<div class="easyui-draggable" style="border: solid 1px; width: 300px;height: 300px;">
+			可拖拽
+		</div>
+
+		整个div方式二：js方法实现
+		<div id="draggable" style="border: solid 1px; width: 300px;height: 300px;">
+			js初始化可拖拽
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#draggable").draggable()
+			})
+		</script>
+
+		标题方式一：
+		<!--可以参考data-options="checkbox:true"方式-->
+		<div class="easyui-draggable" style="border: solid 1px; width: 300px;height: 300px;" handle="#title">
+			<div id="title" style="background-color: red;">标题</div>
+		</div>
+
+		标题方式二：
+		<!--可以参考data-options="checkbox:true"方式-->
+		<div class="easyui-draggable" style="border: solid 1px; width: 300px;height: 300px;" data-options="handle:'#title'">
+			<div id="title" style="background-color: red;">标题</div>
+		</div>
+
+		标题方式三：
+		<div id="draggable2" style="border: solid 1px; width: 300px;height: 300px;">
+			<div id="title" style="background-color: red;">标题</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#draggable2").draggable({
+					handle: "#title"
+				})
+			})
+		</script>
+
+		代理克隆：
+		<div id="draggable3" style="border: solid 1px; width: 300px;height: 300px;">
+			<div id="title" style="background-color: red;">标题</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#draggable3").draggable({
+					proxy: "clone"
+				})
+			})
+		</script>
+
+		其他代理:
+		<div id="draggable4" style="border: solid 1px; width: 300px;height: 300px;">
+
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#draggable4").draggable({
+					proxy: function(source) {
+						var p = $("<div style='background-color: red;width: 80px; height: 80px;'></div>");
+						p.appendTo("body");
+						return p;
+					}
+				})
+			})
+		</script>
+
+		拖动限制
+		<div style="height: 300px;width: 300px;border: 1px solid #ccc;">
+			<div id="drag04" style="width: 100px; height: 100px; background-color: #cccccc;"></div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#drag04").draggable({
+					onDrag: function(e) {
+						var d = e.data;
+						if(d.left < d.parent.offsetLeft) { //如果拖动到最左边
+							d.left = d.parent.offsetLeft;
+						}
+						if(d.top < d.parent.offsetTop) { //如果拖动到最
+							d.top = d.parent.offsetTop;
+						}
+						if(d.left + $(d.target).outerWidth() > $(d.parent).outerWidth() + d.parent.offsetLeft) { //如果拖动到最
+							d.left = $(d.parent).outerWidth() - $(d.target).outerWidth() + d.parent.offsetLeft;
+						}
+						if(d.top + $(d.target).outerHeight() > $(d.parent).outerHeight() + d.parent.offsetTop) { //如果拖动到最
+							d.top = $(d.parent).outerHeight() - $(d.target).outerHeight() + d.parent.offsetTop;
+						}
+					}
+				})
+			})
+		</script>
+
+		<div>拖拽放置</div>
+		<!--原来的容器-->
+		<div class="container">
+			<div class="drags" id="drag1">drag1</div>
+			<div class="drags" id="drag2">drag2</div>
+			<div class="drags" id="drag3">drag3</div>
+		</div>
+		<!--放置的目标容器-->
+		<div id="drop">
+
+		</div>
+
+		<script type="text/javascript">
+			$(".drags").draggable({
+				proxy: "clone",
+				revert: "true" //限定会自动恢复到原定位置
+			})
+			$("#drop").droppable({ //执行容器的方法
+				accept: "#drag1,#drag3", //接收的对象
+				onDragEnter: function(e, source) { //当拖入触发的事件，参数一：事件，参数二：源对象
+					$(source).draggable("options").cursor = "pointer"; //切换鼠标标志
+					$(source).draggable("proxy").css("border", "1px solid red"); //改变颜色
+				},
+				onDragLeave: function(e, source) { //当离开触发事件，参数一：事件，参数二：源对象
+					$(source).draggable("options").cursor = "no-drop"; //切换鼠标标志
+					$(source).draggable("proxy").css("border", "1px solid #ccc"); //改变颜色				
+				},
+				onDrop: function(e, source) { //当接收时触发事件，参数一：事件，参数二：源对象
+					$(this).append(source); //容器对象接收源
+				}
+			})
+		</script>
+		
+		
+		
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+		<div>拖拽排序</div>
+		<ul style="margin: 0;padding: 0;margin-left: 10px;">
+			<li class="drag-item">Drag 1</li>
+			<li class="drag-item">Drag 2</li>
+			<li class="drag-item">Drag 3</li>
+			<li class="drag-item">Drag 4</li>
+			<li class="drag-item">Drag 5</li>
+			<li class="drag-item">Drag 6</li>
+		</ul>
+
+		<style type="text/css">
+			.drag-item {
+				list-style-type: none;
+				display: block;
+				padding: 5px;
+				border: 1px solid #ccc;
+				margin: 2px;
+				width: 300px;
+				background: #fafafa;
+			}
+			
+			.indicator {
+				position: absolute;
+				/*绝对定位*/
+				font-size: 9px;
+				width: 10px;
+				height: 10px;
+				display: none;
+				color: red;
+			}
+		</style>
+		<script>
+			var indicator = $("<div class='indicator'>&gt;&gt:</div>").appendTo("body");
+			$(function() {
+				$(".drag-item").draggable({
+					revert: true //定位
+				}).droppable({ //设置可以放置
+					onDragOver: function(e, source) { //设定指向标志的位置
+						indicator.css({
+							display: "block",
+							left: $(this).offset().left - 10,
+							top: $(this).offset().top + $(this).outerHeight()
+						});
+					},
+					onDragLeave: function(e, source) { //设置指向标志隐藏
+						indicator.hide();
+					},
+					onDrop: function(e, source) {
+						$(source).insertAfter(this); //插入在其后面
+						indicator.hide(); ////设置指向标志隐藏
+					}
+
+				})
+			})
+		</script>
+	</body>
+
+</html>
