@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<div>实现菜单方案一：使用class</div>
+		<ul class="easyui-tree">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+		
+		<div>实现菜单方案二：使用jquery方法，选中节点后调用方法（方法是控件的名字）</div>
+		<ul id="tree">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#tree").tree()
+			})
+		</script>
+		
+		
+		<div>方式一：节点上添加checkbox="true"</div>
+		<ul class="easyui-tree" checkbox="true">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+		
+		
+		<div>方式二：data-options="checkbox:true"</div>
+		<ul class="easyui-tree" data-options="checkbox:true">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+		
+		
+		<div>方式三：jQuery方法内部添加</div>
+		<ul id="tree2">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#tree2").tree({
+					checkbox:true
+				})
+			})
+		</script>
+	</body>
+
+</html>
