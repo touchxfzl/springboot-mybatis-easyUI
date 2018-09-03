@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			multiple：表示是否有固定高度，不能与height共用
+			halign：表示窗口朝向
+			iconCls：图标
+			titleDirection：字体朝向
+		-->
+		<!--multiple:true属性只能写在data-options，而且height: 600px不能存在;-->
+		<div class="easyui-accordion" style="width: 500px;" data-options="multiple:true">
+			<div title="NO1">面板一</div>
+			<div title="NO2">面板二</div>
+			<div title="NO3" selected="true">面板三</div>
+			<!--默认打开第几个面板-->
+		</div>
+		<!--halign:'left'面板向右，图标+字体-->
+		<div class="easyui-accordion" style="width: 500px;height: 300px;" data-options="halign:'left'">
+			<div title="NO1">面板一</div>
+			<div title="NO2" data-options="iconCls:'icon-help',titleDirection:'up'">面板二</div>
+			<div title="NO3" selected="true">面板三</div>
+			<!--默认打开第几个面板-->
+		</div>
+	</body>
+
+</html>

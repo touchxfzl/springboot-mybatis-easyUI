@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+
+		<!--
+			collapsible:true//表示可以折叠,
+			minimizable:true//表示最小化,
+			maximizable:true//表示最大化,
+			closable:true//表示可以关闭,
+			iconCls:'icon-save'//title的图标
+			tools//添加面板工具栏-->
+		<div>基础面板</div>
+		<div class="easyui-panel" style="width: 30%; height: 300px;" data-options="title:'属性',tools:'#tools',collapsible:true,maximizable:true,closable:true,minimizable:true,iconCls:'icon-save'">
+			<p>标题</p>
+		</div>
+		<div id="tools">
+			<!--面板工具栏-->
+			<a href="#" class="icon-add" onclick="javascript:alert('add')"></a>
+			<a href="#" class="icon-edit" onclick="javascript:alert('edit')"></a>
+		</div>
+
+		<div>远程面板</div>
+		<!--href表示远程引用-->
+		<div class="easyui-panel" style="width: 30%; height: 300px;" data-options="title:'引用远程页面',href:'tree.html'">
+
+		</div>
+
+		<div>底部属性</div>
+		<!--footer表示引用到底部-->
+		<div class="easyui-panel" style="width: 30%; height: 300px;" data-options="title:'引用远程页面',footer:'#foot'">
+
+		</div>
+
+		<div id="foot">
+			这个是底部
+		</div>
+
+		<div>JS版本</div>
+		<div id="panell"></div>
+		<script>
+			$(function() {
+				$("#panell").panel({
+					title: 'js-panel',
+					closable: true,
+					width: 500,
+					height: 400,
+					tools: [{
+							iconCls: 'icon-add',
+							handler: function() {
+								alert('add');
+							}
+						},
+						{
+							iconCls: 'icon-save',
+							handler: function() {
+								alert('save');
+							}
+						}
+					]
+				})
+			})
+		</script>
+
+		<div>面板的方法</div>
+		<input type="button" value="打开" onclick="$('#panel2').panel('open')" /><br />
+		<input type="button" value="关闭" onclick="$('#panel2').panel('close')" />//隐藏<br />
+		<input type="button" value="展开" onclick="$('#panel2').panel('expand')" /><br />
+		<input type="button" value="收起" onclick="$('#panel2').panel('collapse')" /><br />
+		<div id="panel2"></div>
+		<script>
+			$(function() {
+				$("#panel2").panel({
+					title: 'js-panel',
+					closable: true,
+					width: 500,
+					height: 400,
+					tools: [{
+							iconCls: 'icon-add',
+							handler: function() {
+								alert('add');
+							}
+						},
+						{
+							iconCls: 'icon-save',
+							handler: function() {
+								alert('save');
+							}
+						}
+					]
+				})
+			})
+		</script>
+
+		<div>远程加载和远程重新加载</div>
+		<div id="panel3"></div>
+		<script>
+			$(function() {
+				$("#panel3").panel({
+					title: 'js-panel',
+					closable: true,
+					width: 500,
+					height: 400,
+					tools: [ //远程重新加载
+						{
+							iconCls: 'icon-reload',
+							handler: function() {
+								$("#panel3").panel('refresh', "searchbox.html")
+							}
+						}
+					], //页面远程加载
+					href: 'tree.html',
+					onLoad: function() {
+						alert("onload");
+					}
+				})
+			})
+		</script>
+		
+		<div>销毁/标题方向/字体方向</div>
+		<input type="button" value="打开" onclick="$('#panel4').panel('open')" />//对象销毁无法继续打开
+		<div id="panel4"></div>
+		<script>
+			$(function() {
+				$("#panel4").panel({
+					title: 'js-panel',
+					closable: true,
+					width: 500,
+					height: 400,
+					halign: 'right', //标题栏位置，默认在上，可以控制在左右
+					titleDirection: 'up', //标题栏的书写方向
+					tools: [ //远程重新加载
+						{
+							iconCls: 'icon-reload',
+							handler: function() {
+								$("#panel4").panel('refresh', "searchbox.html")
+							}
+						}
+					], //页面远程加载
+					href: 'tree.html',
+					onLoad: function() {
+						alert("onload");
+					},
+					onClose: function() { //关闭后对象销毁，无法重新打开
+						$("#panel4").panel("destroy")
+					}
+
+				})
+			})
+		</script>
+	</body>
+
+</html>

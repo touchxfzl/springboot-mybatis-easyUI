@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<div>普通搜索框</div>
+		<input type="text" class="easyui-searchbox" style="width: 300px;" data-options="searcher:doSearch" />
+
+		<div>流式搜索框</div>
+		<input type="text" class="easyui-searchbox" style="width: 30%;" data-options="searcher:doSearch" />
+		<script>
+			function doSearch(value) {
+				alert(value)
+			}
+		</script>
+
+		<!--普通搜索框-->
+		<!--<input type="text" class="easyui-searchbox" style="width: 300px;" data-options="searcher:doSearch"/>-->
+		<div>分类的搜索框</div>
+		<input type="text" class="easyui-searchbox" style="width: 30%;" data-options="menu:'#mm',searcher:doSearch2" style="width: 400px;" />
+		<div id="mm">
+			<div data-options="name:'cat1',iconCls:'icon-ok'">category1</div>
+			<div data-options="name:'cat2',iconCls:'icon-ok'">category2</div>
+		</div>
+		<script>
+			function doSearch2(value, name) {
+				alert("value=" + value + ":" + name)
+			}
+		</script>
+	</body>
+
+</html>

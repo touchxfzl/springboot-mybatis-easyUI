@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<div>基础版</div>
+		<div class="easyui-pagination" data-options="total:100,pageList:[10,25,50,100],buttons:[{iconCls:'icon-add',handler:function(){alert('add')}}]"></div>
+
+		<div>JS版本</div>
+		<div id="page"></div>
+		<script>
+			$(function() {
+				$("#page").pagination({
+					total: 200,
+					pageList: [10, 25, 50, 100],
+					layout: ['list', 'first', 'links', 'last'], //下拉框，首页，链式，尾页
+					buttons: [{
+						iconCls: 'icon-add',
+						handler: function() {
+							alert('add')
+						},
+					}, {
+						iconCls: 'icon-save',
+						handler: function() {
+							alert('save')
+						}
+					}]
+				})
+			})
+		</script>
+
+		<div>分页嵌入搜索</div>
+		<div class="easyui-pagination" data-options="total:100,buttons:$('#sear')"></div>
+
+		<input id="sear" type="text" class="easyui-searchbox" style="width: 30%;" data-options="searcher:doSearch" />
+		<script>
+			function doSearch(value) {
+				alert(value)
+			}
+		</script>
+		
+		
+		
+	</body>
+
+</html>

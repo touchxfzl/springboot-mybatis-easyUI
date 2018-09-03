@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<div>动态高度</div>
+		<input type="button" value="添加" onclick="add()" />
+		<input type="button" value="删除" onclick="remove()" />
+		<div id="layout" class="easyui-layout" style="width:700px;height:350px;">
+			<div data-options="region:'north'" style="height:50px"></div>
+			<div data-options="region:'south',split:true" style="height:50px;"></div>
+			<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+			<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+			<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+				<p>content</p>
+				<p>content</p>
+				<p>content</p>
+				<p>content</p>
+			</div>
+		</div>
+		<script>
+			function add() {
+				$("#layout").layout("panel", "center").append("<p>new content</p>");
+				setHeight();
+			}
+
+			function remove() {
+				$("#layout").layout("panel", "center").find("p:last").remove();
+				setHeight();
+			}
+
+			function setHeight() {
+				var center = $("#layout").layout("panel", "center");
+				var oldHeight = center.panel("panel").outerHeight();
+				center.panel("resize", {
+					height: 'auto'
+				});
+				var newHeight = center.panel("panel").outerHeight();
+				$("#layout").layout("resize", {
+					height: $("#layout").height() + newHeight - oldHeight
+				});
+			}
+		</script>
+
+		<div>添加</div>
+		<div>删除</div>
+		<div>折叠</div>
+		<div>展开</div>
+		<input type="button" value="添加" onclick="add()" />
+		<input type="button" value="删除" onclick="remove()" />
+		<input type="button" value="折叠" onclick="collapseNorth()" />
+		<input type="button" value="展开" onclick="expandNorth()" />
+		<div id="layout1" class="easyui-layout" style="width:700px;height:350px;">
+			<div data-options="region:'north'" title="North" style="height:50px"></div>
+			<div data-options="region:'south',split:true" style="height:50px;"></div>
+			<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+			<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok',href:'tree.html'">
+			</div>
+		</div>
+		<script>
+			function add() {
+				var east = {
+					region: "east",
+					width: 100,
+					title: "new east"
+				}
+				$("#layout1").layout("add", east);
+			}
+
+			function remove() {
+				$("#layout1").layout("remove", "east");
+			}
+
+			function collapseNorth() {
+				$("#layout1").layout("collapse", "north");
+			}
+
+			function expandNorth() {
+				$("#layout1").layout("expand", "north");
+			}
+		</script>
+		
+		<div>嵌套分页</div>
+		<div id="layout2" class="easyui-layout" style="width:1700px;height:350px;">
+			<div data-options="region:'north'" title="North" style="height:50px"></div>
+			<div data-options="region:'south',split:true" style="height:50px;"></div>
+			<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+			<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok',href:'tree.html',
+		tools:[{
+		iconCls:'icon-add',
+		handler:function(){
+			alert('add')
+		}
+	}],footer:'#page'">
+			</div>
+		</div>
+		<div id="page" class="easyui-pagination" data-options="total:100,pageList:[10,25,50,100],buttons:[{iconCls:'icon-add',handler:function(){alert('add')}}]"></div>
+		<script>
+			$(function() {
+				$("#page").pagination({
+					onSelectPage: function(pageNumber, pageSize) {
+						$(this).pagination('loading');
+						alert('pageNumber:' + pageNumber + ',pageSize:' + pageSize);
+						$(this).pagination('loaded');
+						$("#layout2").layout("panel", "center").panel("refresh", "searchbox.html");
+					}
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

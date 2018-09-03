@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<!--	<body>
+		<div>基础布局:东南西北中+远程面板</div>
+		<div class="easyui-layout" style="width:700px;height:350px;">
+			<div data-options="region:'north'" style="height:50px"></div>
+			<div data-options="region:'south',split:true" style="height:50px;"></div>
+			<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+			<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+			<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok',href:'tree.html'">
+
+			</div>
+		</div>
+	</body>-->
+
+	<body class="easyui-layout">
+		<div data-options="region:'north'" style="height:50px"></div>
+		<div data-options="region:'south',split:true" style="height:50px;"></div>
+		<div data-options="region:'east',split:true,collapsible:false" title="East" style="width:100px;"></div>
+		<div data-options="region:'west',split:true" title="West" style="width:200px;">
+			<!--multiple:true属性只能写在data-options，而且height: 600px不能存在;-->
+			<div class="easyui-accordion" style="width: 500px;height: 600px;">
+				<div title="NO1">面板一</div>
+				<div title="NO2">面板二</div>
+				<div title="NO3" selected="true">面板三</div>
+				<!--默认打开第几个面板-->
+			</div>
+		</div>
+		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+			<div class="easyui-layout " fit="true">
+				<div data-options="region:'north'" style="height:50px"></div>
+				<div data-options="region:'south',split:true" style="height:50px;"></div>
+				<div data-options="region:'east',split:true" title="East" style="width:100px;">
+
+					<div>基础布局:东南西北中+远程面板</div>
+					<div class="easyui-layout" style="width:700px;height:350px;">
+						<div data-options="region:'north'" style="height:50px"></div>
+						<div data-options="region:'south',split:true" style="height:50px;"></div>
+						<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+						<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+						<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok',href:'tree.html'">
+
+						</div>
+					</div>
+				</div>
+				<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+				<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok',href:'tree.html'">
+
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
