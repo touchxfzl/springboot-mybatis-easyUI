@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+按钮菜单层级化	
+-->
+		<div id="mm" class="easyui-menu" style="width: 120px;" data-options="onClick:menuHandler">
+			<div data-options="iconCls:'icon-add',name:'new'">New</div>
+			<div class="menu-sep"></div>
+			<div>
+				<span>Sub</span>
+				<div>
+					<div><span>sub1</span></div>
+					<div>
+						<span>sub2</span>
+						<div>
+							<div><span>sub2-1</span></div>
+							<div><span>sub2-2</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function menuHandler(item) {
+				alert(item.name)
+			}
+			$(function() {
+				//应用在整个窗口
+				$(document).bind("contextmenu", function(e) {
+					//浏览器按钮事件失效
+					e.preventDefault();
+					//easyui按钮事件show，显示按钮
+					$("#mm").menu("show", {
+						left: e.pageX,
+						top: e.pageY
+					});
+				})
+			})
+		</script>
+	</body>
+
+</html>

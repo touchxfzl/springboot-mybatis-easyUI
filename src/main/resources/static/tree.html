@@ -26,7 +26,7 @@
 			<li>菜单2</li>
 			<li>菜单3</li>
 		</ul>
-		
+
 		<div>实现菜单方案二：使用jquery方法，选中节点后调用方法（方法是控件的名字）</div>
 		<ul id="tree">
 			<li>
@@ -40,14 +40,13 @@
 			<li>菜单2</li>
 			<li>菜单3</li>
 		</ul>
-		
+
 		<script type="text/javascript">
-			$(function(){
+			$(function() {
 				$("#tree").tree()
 			})
 		</script>
-		
-		
+
 		<div>方式一：节点上添加checkbox="true"</div>
 		<ul class="easyui-tree" checkbox="true">
 			<li>
@@ -61,8 +60,7 @@
 			<li>菜单2</li>
 			<li>菜单3</li>
 		</ul>
-		
-		
+
 		<div>方式二：data-options="checkbox:true"</div>
 		<ul class="easyui-tree" data-options="checkbox:true">
 			<li>
@@ -76,8 +74,7 @@
 			<li>菜单2</li>
 			<li>菜单3</li>
 		</ul>
-		
-		
+
 		<div>方式三：jQuery方法内部添加</div>
 		<ul id="tree2">
 			<li>
@@ -91,12 +88,69 @@
 			<li>菜单2</li>
 			<li>菜单3</li>
 		</ul>
-		
+
 		<script type="text/javascript">
-			$(function(){
+			$(function() {
 				$("#tree2").tree({
-					checkbox:true
+					checkbox: true
 				})
+			})
+		</script>
+
+		<div>线性结构和缓慢升起</div>
+		<!--
+			带线性结构lines:true
+			带缓慢收起animate:true
+		-->
+		<ul class="easyui-tree" data-options="animate:true,lines:true">
+			<li>
+				<span>菜单1</span>
+				<ul>
+					<li>菜单1-1</li>
+					<li>菜单1-2</li>
+					<li>菜单1-3</li>
+				</ul>
+			</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+		</ul>
+
+		<div>data/【】/图标</div>
+		<!--
+			通过data加载树的节点
+			给树节点添加【】
+			给树节点添加图标
+		-->
+		<ul id="treeID">
+
+		</ul>
+		<script type="text/javascript">
+			$("#treeID").tree({
+				data: [{
+					text: 'Item1'
+				}, {
+					text: 'Item2'
+				}, {
+					text: 'Item3',
+					state: 'closed',
+					children: [{
+						text: 'item3-1'
+					}, {
+						text: 'item3-2'
+					}, {
+						text: 'item3-3'
+					}]
+				}],
+				formatter: function(node) {
+					return "[" + node.text + "]";
+				},
+				loadFilter: function(data) {
+					for(var i = 0; i < data.length; i++)
+						if(data[i].text == "Item2") {
+							data[i].iconCls = "icon-add";
+						}
+					return data;
+				}
 			})
 		</script>
 	</body>

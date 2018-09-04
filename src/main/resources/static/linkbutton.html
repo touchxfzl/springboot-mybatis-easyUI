@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			按钮跳转href：href="remote.html"
+			按钮默认选中：selected:true
+			按钮选中与不选择切换：toggle:true
+			按钮图标位置：iconAlign:'right'
+			按钮简单形式：plain:true
+			按钮多选一：group:'g1',toggle:true
+		-->
+		<div>基础菜单</div>
+		<a href="tree.html" class="easyui-linkbutton">text</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',selected:true">icon</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-clipart',iconAlign:'left'">icon</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-clipart',iconAlign:'left',size:'large'">icon</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-clipart',iconAlign:'top',toggle:true">icon</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-clipart',iconAlign:'top',toggle:true,plain:true">icon</a>
+
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',group:'g1',toggle:true">icon1</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',group:'g1',toggle:true">icon2</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',group:'g1',toggle:true">icon3</a>
+
+		<!--
+			菜单弹出对齐方式：menuAlign:'right'
+			按钮什么情况弹出菜单：easyui-splitbutton
+						   easyui-menubutton
+		-->
+		<br /><br />
+		<div>菜单按钮</div>
+		<a href="tree.html" class="easyui-menubutton" data-options="iconCls:'icon-add',menu:'#mm1'">Add</a>
+		<a href="tree.html" class="easyui-menubutton" data-options="iconCls:'icon-help',menu:'#mm2',menuAlign:'left'">Help</a>
+		<a href="tree.html" class="easyui-splitbutton" data-options="iconCls:'icon-help',menu:'#mm3',menuAlign:'right'">Help2</a>
+		<div id="mm1" class="easyui-menu" style="width: 120px;">
+			<div>New</div>
+			<div>Save</div>
+			<div>Exit</div>
+		</div>
+		<div id="mm2" class="easyui-menu" style="width: 120px;">
+			<div data-options="iconCls:'icon-add',name:'new'">New</div>
+			<div data-options="iconCls:'icon-save',name:'save'">Saveqqqqqqqqqq</div>
+			<div data-options="name:'exit'">Exit</div>
+		</div>
+		<div id="mm3" class="easyui-menu" style="width: 120px;">
+			<div data-options="iconCls:'icon-add',name:'new'">New</div>
+			<div data-options="iconCls:'icon-save',name:'save'">Saveqqqqqqqqqq</div>
+			<div data-options="name:'exit'">Exit</div>
+		</div>
+		
+		<br /><br />
+		<div>选项卡嵌套按钮</div>
+		<div style="margin:20px 0;"></div>
+		<div id="tt" style="width:700px;height:250px">
+			<div title="About" style="padding:10px">
+
+			</div>
+			<div title="My Documents" style="padding:10px">
+				<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true"></ul>
+			</div>
+			<div title="Help" style="padding:10px">
+				This is the help content.
+			</div>
+		</div>
+		<div id="mm">
+			<div>Welcome</div>
+			<div>Help Contents</div>
+			<div data-options="iconCls:'icon-search'">Search</div>
+			<div>Dynamic Help</div>
+		</div>
+
+		<script>
+			$(function() {
+				var p = $('#tt').tabs().tabs('tabs')[2];
+				var mb = p.panel('options').tab.find('a.tabs-inner');
+				mb.menubutton({
+					menu: '#mm',
+					iconCls: 'icon-help'
+				}).click(function() {
+					$('#tt').tabs('select', 2);
+				});
+			});
+		</script>
+	</body>
+
+</html>
