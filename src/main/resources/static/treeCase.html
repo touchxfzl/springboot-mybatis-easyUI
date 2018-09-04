@@ -13,16 +13,26 @@
 	</head>
 
 	<body>
-
+		<input type="button" value="全选" onclick='alertNode($("#tree").tree("getChecked"))' />
+		<input type="button" value="半选" onclick='alertNode($("#tree").tree("getChecked","indeterminate"))' />
+		<input type="button" value="全选半选" onclick='alertNode($("#tree").tree("getChecked",["indeterminate","checked"]))' />
+		<input type="button" value="未选中" onclick='alertNode($("#tree").tree("getChecked","unchecked"))' />
 		<ul id="tree">
 
 		</ul>
 
 		<script type="text/javascript">
+			function alertNode(nodes) {
+				var texts = new Array();
+				$(nodes).each(function(i, node) {
+					texts[i] = node["text"];
+				});
+				alert(texts.join(","));
+			}
 			$("#tree").tree({
 				checkbox: true, //复选框
-				collapseAll:true,
-				cascadeCheck: false, //级联选中：false
+				collapseAll: true,
+				//cascadeCheck: false, //级联选中：false
 				//onlyLeafCheck: true, //只是叶子节点有复选框
 				url: "http://localhost:8080/getTree",
 				method: "get",
