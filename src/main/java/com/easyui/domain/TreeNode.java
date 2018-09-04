@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TreeNode {
-	private Integer id;
-	private String text;
-	private String state;
-	private Integer parentId;
+	private Integer id;//表示树的id
+	private String text;//表示树的名称
+	private String state;//closed表示树闭合
+	private Integer parentId;//表示树的父节点
 	private List<TreeNode> children = new ArrayList<>();
 
 	public Integer getId() {
