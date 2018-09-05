@@ -17,7 +17,7 @@ public class TreeNodeService {
 	@Autowired
 	private TreeNodeMappper treeNodeMappper;
 
-	public List<TreeNode> getTree() {
+	public List<TreeNode> getList() {
 		List<TreeNode>  nodes= treeNodeMappper.getList();
 		Map<Integer, TreeNode> map = new HashMap<>();
 		List<TreeNode> parents = new ArrayList<>();
@@ -36,6 +36,20 @@ public class TreeNodeService {
 		}
 		
 		return parents;
+	}
+	
+	Integer id =1000;
+
+	public void addTree(TreeNode node) {
+
+		node.setId(++id );
+		treeNodeMappper.add(node);
+		
+	}
+	
+	
+	public void updataNode(TreeNode node) {
+		treeNodeMappper.updateNode(node);
 	}
 
 }

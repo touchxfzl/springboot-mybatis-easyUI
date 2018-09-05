@@ -36,7 +36,52 @@
 				//onlyLeafCheck: true, //只是叶子节点有复选框
 				url: "http://localhost:8080/getTree",
 				method: "get",
+				//拖拽属性与方法
+				dnd: true,
+				onDrop: function(target, source, point) {
+					alert(source.text);
+					alert($(this).tree("getNode", target).text);
+					editNode(source.text, source.id, $(this).tree(
+						"getNode", target).id);
+				},
+				//此方法添加了【】在文本中
+				formatter: function(node) {
+					return "[" + node.text + "]";
+				},
+//				loadFilter: function(data) {
+//					for(var i = 0; i < data.length; i++)
+//						if(data[i].text == "Item2") {
+//							data[i].iconCls = "icon-add";
+//						}
+//					return data;
+//				},
+				onClick: function(node) {
+					$(this).tree("beginEdit", node.target);
+				},
+				onAfterEdit: function(node) {
+					editNode(node.text, node.id, node.parentId);
+				}
 			})
+
+			function editNode(text, id, parentId) {
+				$.ajax({
+					url: "http://localhost:8080/edit_tree.json",
+					method: "post",
+					data: {
+						id: id,
+						text: text,
+						parentId: parentId
+					},
+					success: function(data) {
+						if(data.status == "true") {
+							$("#tree").tree("reload");
+						}
+					}
+				});
+				alert("ok: " + text);
+				alert("ok: " + id);
+				alert("ok: " + parentId);
+			}
 		</script>
 	</body>
 
