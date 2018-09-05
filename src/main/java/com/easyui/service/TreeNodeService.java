@@ -51,5 +51,12 @@ public class TreeNodeService {
 	public void updataNode(TreeNode node) {
 		treeNodeMappper.updateNode(node);
 	}
+	
+	public void deleteNode(Integer[] ids) {
+		for (Integer id : ids) {
+			treeNodeMappper.updateNodeByParentId(id);
+			treeNodeMappper.delete(id);
+		}
+	}
 
 }

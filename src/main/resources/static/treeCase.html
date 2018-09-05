@@ -17,9 +17,16 @@
 		<input type="button" value="半选" onclick='alertNode($("#tree").tree("getChecked","indeterminate"))' />
 		<input type="button" value="全选半选" onclick='alertNode($("#tree").tree("getChecked",["indeterminate","checked"]))' />
 		<input type="button" value="未选中" onclick='alertNode($("#tree").tree("getChecked","unchecked"))' />
+		<input type="button" value="删除" onclick="deleteNode()" />
 		<ul id="tree">
 
 		</ul>
+
+		<div id="mm" class="easyui-menu" style="width: 120px;">
+			<div onclick="appendNode()" data-options="iconCls:'icon-add'">Append</div>
+			<div onclick="insertNode()" data-options="iconCls:'icon-back'">Insert</div>
+			<div onclick="removeNode()" data-options="iconCls:'icon-remove'">Remove</div>
+		</div>
 
 		<script type="text/javascript">
 			function alertNode(nodes) {
@@ -48,18 +55,31 @@
 				formatter: function(node) {
 					return "[" + node.text + "]";
 				},
-//				loadFilter: function(data) {
-//					for(var i = 0; i < data.length; i++)
-//						if(data[i].text == "Item2") {
-//							data[i].iconCls = "icon-add";
-//						}
-//					return data;
-//				},
-				onClick: function(node) {
+				//				loadFilter: function(data) {
+				//					for(var i = 0; i < data.length; i++)
+				//						if(data[i].text == "Item2") {
+				//							data[i].iconCls = "icon-add";
+				//						}
+				//					return data;
+				//				},
+
+				//实现可编辑树：onDblClick（双击），onClick（单击）
+				onDblClick: function(node) {
 					$(this).tree("beginEdit", node.target);
 				},
 				onAfterEdit: function(node) {
 					editNode(node.text, node.id, node.parentId);
+				},
+
+				//实现树菜单
+				onContextMenu: function(e, node) {
+					e.preventDefault();
+					$(this).tree("select", node.target);
+					$("#mm").menu("show", {
+						left: e.pageX,
+						top: e.pageY
+					});
+
 				}
 			})
 
@@ -81,6 +101,83 @@
 				alert("ok: " + text);
 				alert("ok: " + id);
 				alert("ok: " + parentId);
+			}
+
+			//菜单三法：appendNode
+			var id = 0;
+
+			function appendNode() {
+				var selected = $("#tree").tree("getSelected");
+				var node = {
+					parent: selected.target,
+					data: [{
+						id: id, //++id
+						text: '',
+						parentId: $('#tree').tree("getNode", selected.target).id
+					}]
+				}
+				$("#tree").tree("append", node);
+				node = $("#tree").tree("find", id);
+				$("#tree").tree("beginEdit", node.target);
+				alter("789");
+			}
+
+			//菜单三法：insertNode
+			function insertNode() {
+				var selected = $("#tree").tree("getSelected");
+				var node = {
+					id: id,
+					text: '',
+					parentId: $('#tree').tree("getNode", selected.target).parentId
+				}
+				$("#tree").tree("insert", {
+					after: selected.target,
+					data: node
+				});
+				node = $("#tree").tree("find", id);
+				$("#tree").tree("beginEdit", node.target)
+
+			}
+
+			//菜单三法：removeNode
+			function removeNode() {
+				var selected = $("#tree").tree("getSelected");
+				//$("#tree").tree("remove", selected.target);
+				$.ajax({
+					type: "post",
+					url: "http://127.0.0.1:8080/delete_tree.json",
+					data: {
+						ids: selected.id
+					},
+					cashe: false,
+					success: function(data) {
+						if(data.status == "true") {
+							$("#tree").tree("reload");
+						}
+					}
+				});
+			}
+
+			//多选删除
+			function deleteNode() {
+				var nodes = $("#tree").tree("getChecked");
+				var ids = new Array();
+				$(nodes).each(function(i, node) {
+					ids[i] = node["id"];
+				});
+				$.ajax({
+					type: "post",
+					url: "http://127.0.0.1:8080/delete_tree.json",
+					data: {
+						ids: ids.join(",")
+					},
+					cashe: false,
+					success: function(data) {
+						if(data.status == "true") {
+							$("#tree").tree("reload");
+						}
+					}
+				});
 			}
 		</script>
 	</body>

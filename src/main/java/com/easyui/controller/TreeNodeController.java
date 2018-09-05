@@ -42,4 +42,20 @@ public class TreeNodeController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("/delete_tree.json")
+	public Map<String, String> deleteNode(Integer[] ids){
+		Map<String, String> result = new HashMap<>();
+		try {
+			treeNodeService.deleteNode(ids);
+			result.put("status", "true");
+			result.put("message", "删除成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.put("status", "false");
+			result.put("message", "删除失败");
+		}
+		return result;
+	}
 }
