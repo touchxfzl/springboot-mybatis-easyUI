@@ -58,7 +58,7 @@
 			<div data-options="iconCls:'icon-save',name:'save'">Saveqqqqqqqqqq</div>
 			<div data-options="name:'exit'">Exit</div>
 		</div>
-		
+
 		<br /><br />
 		<div>选项卡嵌套按钮</div>
 		<div style="margin:20px 0;"></div>
@@ -92,6 +92,259 @@
 				});
 			});
 		</script>
+
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+		<p>基础弹框</p>
+		<a href="#" class="easyui-linkbutton" onclick="show()">Show</a>
+		<script type="text/javascript">
+			function show() {
+				$.messager.show({
+					title: 'My title',
+					msg: 'this is message',
+					showType: 'show'
+				})
+			}
+		</script>
+
+		<a href="#" class="easyui-linkbutton" onclick="slide()">Slide</a>
+		<script type="text/javascript">
+			function slide() {
+				$.messager.show({
+					title: 'My title',
+					msg: 'this is message',
+					showType: 'slide',
+					timeout: 5000
+				})
+			}
+		</script>
+
+		<a href="#" class="easyui-linkbutton" onclick="fade()">fade</a>
+		<script type="text/javascript">
+			function fade() {
+				$.messager.show({
+					title: 'My title',
+					msg: 'this is message',
+					showType: 'fade'
+				})
+			}
+		</script>
+
+		<a href="#" class="easyui-linkbutton" onclick="progress()">progress</a>
+		<script type="text/javascript">
+			function progress() {
+				$.messager.progress({
+					title: 'progress哈哈哈',
+					msg: 'loading...哈哈哈',
+				});
+				setTimeout(function() {
+					$.messager.progress("close")
+				}, 3000)
+			}
+		</script>
+		
+		
+		<p>位置弹框</p>
+				<p>
+			<a href="#" class="easyui-linkbutton" onclick="topLeft()">topLeft</a>
+		</p>
+		<script type="text/javascript">
+			function topLeft(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:"",
+						left:0,
+						top:document.body.scrollTop+document.documentElement.scrollTop,
+						bottom:""
+					}
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="topCenter()">topCenter</a>
+		</p>
+		<script type="text/javascript">
+			function topCenter(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:"",
+						//left:0,
+						top:document.body.scrollTop+document.documentElement.scrollTop,
+						bottom:""
+					}
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="topRight()">topRight</a>
+		</p>
+		<script type="text/javascript">
+			function topRight(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:0,
+						left:'',
+						top:document.body.scrollTop+document.documentElement.scrollTop,
+						bottom:""
+					}
+				})
+			}
+		</script>
+		
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="centerLeft()">centerLeft</a>
+		</p>
+		<script type="text/javascript">
+			function centerLeft(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:"",
+						left:0,
+						//top:document.body.scrollTop+document.documentElement.scrollTop,
+						//bottom:""
+					}
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="centerRight()">centerRight</a>
+		</p>
+		<script type="text/javascript">
+			function centerRight(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:0,
+						left:"",
+//						top:document.body.scrollTop+document.documentElement.scrollTop,
+//						bottom:""
+					}
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="center()">center</a>
+		</p>
+		<script type="text/javascript">
+			function center(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+//						right:0,
+//						left:'',
+//						top:document.body.scrollTop+document.documentElement.scrollTop,
+//						bottom:""
+					}
+				})
+			}
+		</script>
+		
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="bottomLeft()">bottomLeft</a>
+		</p>
+		<script type="text/javascript">
+			function bottomLeft(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+						right:"",
+						left:0,
+						top:"",
+						bottom:document.body.scrollTop-document.documentElement.scrollTop
+					}
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="bottomRight()">bottomRight</a>
+		</p>
+		<script type="text/javascript">
+			function bottomRight(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show'
+				})
+			}
+		</script>
+		
+		<p>
+			<a href="#" class="easyui-linkbutton" onclick="bottomCenter()">bottomCenter</a>
+		</p>
+		<script type="text/javascript">
+			function bottomCenter(){
+				$.messager.show({
+					title:'My title',
+					msg:'this is message',
+					showType:'show',
+					style:{
+//						right:"",
+//						left:"",
+						top:"",
+						bottom:document.body.scrollTop-document.documentElement.scrollTop
+					}
+				})
+			}
+		</script>
+		
+		
+		<br /><br /><br /><br /><br /><br /><br /><br />
+		<!--
+			alert
+			confirm
+			prompt
+		-->
+		<p>交互联系框</p>
+		<p>注意函数名，不要调用了系统的函数</p>
+		<a class="easyui-linkbutton" onclick="myalert()">alert</a>
+		<a class="easyui-linkbutton" onclick="myconfirm()">myconfirm</a>
+		<a class="easyui-linkbutton" onclick="myprompt()">myprompt</a>
+		<script type="text/javascript">
+			function myalert(){
+//				$.messager.alert("title","context","info");
+//				$.messager.alert("title","context","error");
+//				$.messager.alert("title","context","question");
+				$.messager.alert("title","context","warning");
+			}
+			function myconfirm(){
+				$.messager.confirm("title","context",function(r){
+					alert(r)
+				});
+			}
+			function myprompt(){
+				$.messager.prompt("title","context",function(r){
+					if (r){
+						alert('you type: '+r);
+					}
+				});
+			}
+			
+		</script>
+
 	</body>
 
 </html>

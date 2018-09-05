@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			打开事件和关闭事件
+			是否折叠/关闭/最大/最小
+			屏障:modal:true
+			初始关闭:closed:true
+			内联：只能在父容器中拖动
+			子容器超出隱藏：overflow: hidden
+			相對定位：relative
+		-->
+		<input type="button" value="open" onclick="$('#w').window('open')" />
+		<input type="button" value="close" onclick="$('#w').window('close')" />
+		<div class="easyui-panel" style="width: 700px;height: 700px;overflow: hidden;position: relative;">
+			<div id="w" class="easyui-window" title="myWindow" style="width: 500px; height: 300px;" data-options="collapsible:false,inline:true,modal:true">
+
+			</div>
+			<input type="text" />
+		</div>
+
+		<!--
+			增加工具栏
+			编辑工具栏
+			帮助工具栏
+			动态获取
+		-->
+		<div class="easyui-window" style="width: 400px;height: 300px;" data-options="iconCls:'icon-save',tools:'#tool',href:'tree.html'">
+
+		</div>
+
+		<div id="tool">
+			<a href="#" class="icon-add" onclick="alert('add')"></a>
+			<a href="#" class="icon-edit" onclick="alert('edit')"></a>
+			<a href="#" class="icon-help" onclick="alert('help')"></a>
+		</div>
+		
+		
+		
+	</body>
+
+</html>

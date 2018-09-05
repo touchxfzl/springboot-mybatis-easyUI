@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+	最大小值
+	保留小数
+	必填
+	分隔符
+	前缀后缀
+-->
+		<input class="easyui-numberbox" data-options="min:10,max:90,precision:2,required:true" />
+		<input class="easyui-numberbox" value="123456.99" data-options="precision:2,groupSeparator:',',prefix:'$'" />
+		<input class="easyui-numberbox" value="123456.99" data-options="precision:2,groupSeparator:',',suffix:'$'" />
+		<input id="num" />
+		<script type="text/javascript">
+			$("#num").numberbox({
+				precision: 2,
+				groupSeparator: ','
+			})
+		</script>
+	</body>
+
+</html>

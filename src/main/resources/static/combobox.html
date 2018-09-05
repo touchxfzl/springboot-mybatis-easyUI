@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<p>基础选择框</p>
+		<div>
+			<!--<input id="cc" style="width: 150px;" />-->
+			<select id="cc" style="width: 150px;"></select>
+		</div>
+		<div id="sp">
+			<input type="radio" name="lang" value="01" /><span>Java</span><br />
+			<input type="radio" name="lang" value="02" /><span>Python</span><br />
+			<input type="radio" name="lang" value="03" /><span>PHP</span><br />
+			<input type="radio" name="lang" value="04" /><span>C#</span><br />
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#cc").combo({
+					required: true,
+					editable: false
+				});
+				$("#sp").appendTo($("#cc").combo("panel"));
+				$("#sp input").click(function() {
+					var v = $(this).val();
+					var s = $(this).next("span").text();
+					$("#cc").combo("setValue", v).combo("setText", s).combo("hidePanel")
+				})
+			});
+		</script>
+
+		//可以设置多选
+		<p>经典选择框</p>
+		<select class="easyui-combobox" style="width: 100px;height: 50px;" data-options="multiple:true,multiline:true">
+			<option value="1">Java</option>
+			<option value="2">PHP</option>
+			<option value="3">Python</option>
+		</select>
+
+		<p>分组选择框</p>
+		<input id="group" />
+		<script type="text/javascript">
+			$(function() {
+				var data = [{
+					"value": "1",
+					"text": "firefox 2.0",
+					"group": "Firefox"
+				}, {
+					"value": "2",
+					"text": "firefox 1.5",
+					"group": "Firefox"
+				}, {
+					"value": "3",
+					"text": "ie 6.0",
+					"group": "IE"
+				}, {
+					"value": "4",
+					"text": "ie 7.0",
+					"group": "IE"
+				}];
+				$("#group").combobox({
+					data: data,
+					groupField: "group",
+					icons: [{
+						iconCls: 'icon-add',
+						handler: function() {
+							alert("add")
+						}
+					}, {
+						iconCls: 'icon-remove',
+						handler: function() {
+							alert("remove")
+						}
+					}]
+				})
+			})
+		</script>
+
+		<p>加载分组数据</p>
+		<input id="group1" class="easyui-combobox" /><input type="button" onclick="loadercombobox()" value="加载" />
+		<script type="text/javascript">
+			function loadercombobox() {
+				$("#group1").combobox("loadData", [{
+					"value": "1",
+					"text": "firefox 2.0",
+					"group": "Firefox"
+				}, {
+					"value": "2",
+					"text": "firefox 1.5",
+					"group": "Firefox"
+				}, {
+					"value": "3",
+					"text": "ie 6.0",
+					"group": "IE"
+				}, {
+					"value": "4",
+					"text": "ie 7.0",
+					"group": "IE"
+				}])
+			}
+		</script>
+	</body>
+
+</html>

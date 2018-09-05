@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<form action="#" method="post">
+			<p>必填<input class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" name="username" /></p>
+			<p>邮件<input class="easyui-validatebox" data-options="required:true,validType:'email',validateOnCreate:false" name="email" /></p>
+			<p>网址<input class="easyui-validatebox" data-options="required:true,validType:'url'" name="url" /></p>
+			<p>
+				js<input id="vv" />
+			</p>
+			<script type="text/javascript">
+				$(function() {
+					$("#vv").validatebox({
+						required: true,
+						validType: 'email'
+					})
+				})
+			</script>
+
+		</form>
+
+		<p>
+			密码<input class="easyui-validatebox" id="pwd" data-options="required:true" />
+		</p>
+		<p>
+			确认密码<input class="easyui-validatebox" data-options="required:true" validType="equals['#pwd']" />
+		</p>
+		<script type="text/javascript">
+			$.extend($.fn.validatebox.defaults.rules, {
+				equals: {
+					validator: function(value, param) {
+						return value == $(param[0]).val();
+					},
+					message: 'Field do not match'
+				}
+			});
+		</script>
+	</body>
+
+</html>

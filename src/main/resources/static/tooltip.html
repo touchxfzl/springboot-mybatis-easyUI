@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<p>基础提示</p>
+		<a href="#" class="easyui-tooltip" title="this is tooltip">hover me</a>
+
+		<p>js版提示</p>
+		<a href="#" class="easyui-tooltip" title="this is tooltip">hover me</a>
+		<a href="#" style="margin-left: 100px;" id="dd">hover me</a>
+		<script type="text/javascript">
+			$(function() {
+				$("#dd").tooltip({
+					position: "left",
+					content: "i am content",
+					onShow: function() {
+						$(this).tooltip("tip").css({
+							backgroundColor: "#666",
+							borderColor: "#666"
+						})
+					}
+				})
+			})
+		</script>
+
+		<p>提示面板</p>
+		<a id="ddd">login</a>
+		<div id="dd-form" style="display: none;">
+			<div>username:<input type="text" /></div>
+			<div>password:<input type="password" /></div>
+			<div><input type="button" value="login" /></div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#ddd").tooltip({
+					content: $("#dd-form"),
+					showEvent: "click", //修改为点击事件，原来是鼠标在上事件
+					onShow: function() {
+						var t = $(this);
+						t.tooltip("tip").unbind().bind("mouseenter", function() {
+							t.tooltip("show");
+						}).bind("mouseleave", function() {
+							t.tooltip("hide")
+						})
+					},
+					onUpdate: function(content) {
+						content.panel({
+							width: 300,
+							title: "login"
+						})
+					}
+				})
+			})
+		</script>
+
+		<p>提示面板远程版</p>
+		<a id="dddd">login</a>
+		<div id="dddd-form" style="display: none;">
+
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$("#dddd").tooltip({
+					content: $("#dddd-form"),
+					showEvent: "click", //修改为点击事件，原来是鼠标在上事件
+					onShow: function() {
+						var t = $(this);
+						t.tooltip("tip").unbind().bind("mouseenter", function() {
+							t.tooltip("show");
+						}).bind("mouseleave", function() {
+							t.tooltip("hide")
+						})
+					},
+					onUpdate: function(content) {
+						content.panel({
+							width: 300,
+							title: "login",
+							href: "dialog.html"
+						})
+					}
+				})
+			})
+		</script>
+
+		<p>提示工具栏基础班</p>
+		<a href="#" class="easyui-tooltip" data-options="
+			hideEvent:'none',
+			content:function(){
+				return $('#toolbar');
+			},
+			onShow:function(){
+				var t = $(this);
+				t.tooltip('tip').focus().bind('blur',function(){
+					t.tooltip('hide')
+				})
+			}">toolbar</a>
+		<div style="display: none;">
+			<div id="toolbar">
+				<a class="easyui-linkbutton" title="Add" data-options="iconCls:'icon-add',plain:true"></a>
+				<a class="easyui-linkbutton" title="Save" data-options="iconCls:'icon-save',plain:true"></a>
+			</div>
+		</div>
+
+		<p>提示工具栏js版</p>
+		<a id="cc" href="#" class="easyui-tooltip">toolbar</a>
+		<div style="display: none;">
+			<div id="toolbarcc">
+				<a class="easyui-linkbutton" title="Add" data-options="iconCls:'icon-add',plain:true"></a>
+				<a class="easyui-linkbutton" title="Save" data-options="iconCls:'icon-save',plain:true"></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$("#cc").tooltip({
+				hideEvent: 'none',
+				content: function() {
+					return $('#toolbarcc');
+				},
+				onShow: function() { //提示出現事件
+					var t = $(this);
+					t.tooltip('tip').focus().unbind().bind('blur', function() {
+						t.tooltip('hide')
+					})
+				},
+				trackMouse: true, //跟隨鼠標
+				showDelay: 2000 //延後2秒
+			})
+		</script>
+	</body>
+
+</html>
