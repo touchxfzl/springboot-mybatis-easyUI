@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<div>文件上传基础</div>
+		<input class="easyui-filebox" name="file" data-options="prompt:'Choose a file'" style="width: 20%;" />
+		
+		<div>文件上传修改按钮位置和长度</div>
+		<input class="easyui-filebox" name="file" data-options="prompt:'Choose a file',buttonAlign:'left'" style="width: 20%;" />
+		
+		<div>JS版本</div>
+		<input id="ff" />
+		<script type="text/javascript">
+			$(function() {
+				$("#ff").filebox({
+					buttonAlign: 'left'
+				})
+			})
+		</script>
+	</body>
+
+</html>
