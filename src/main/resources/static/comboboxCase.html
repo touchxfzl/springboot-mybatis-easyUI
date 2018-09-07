@@ -13,7 +13,32 @@
 	</head>
 
 	<body>
+		<select class="easyui-combobox" style="width: 100px;" data-options="loader:myloader,mode:'remote',valueField:'id',
+		
+		textField:'name',formatter:formatItem,panelWidth:350,panelHeight:'auto'">
 
+		</select>
+
+		<script type="text/javascript">
+			var myloader = function(param, success, error) {
+				$.ajax({
+					url: "http://localhost:8080/combobox",
+					dataType: "json",
+					success: function(data) {
+						alert("ok")
+						success(data);
+					},
+					error: function() {
+						alert("no")
+						error.apply(this, arguments)
+					}
+				});
+			}
+
+			function formatItem(row) {
+				return '<span style="color:#00ee00">' + row.name + "</span>[" + row.id + "]";
+			}
+		</script>
 	</body>
 
 </html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			跳转到对应天数
+			设置第一天是周日还是周一
+		-->
+		<p>跳转到对应天数+设置第一天是周日还是周一</p>
+		<div class="easyui-calendar" style="width: 180px;height: 180px;"></div>
+		<div id="cal">
+
+		</div>
+		<input type="button" value="跳转2015-05-01" onclick="$('#cal').calendar('moveTo',new Date(2015,5,1))" />
+		<script type="text/javascript">
+			$(function() {
+				$("#cal").calendar({
+					firstDay: 1,
+					onSelect: function(date) {
+						alert(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate())
+					}
+				})
+			})
+		</script>
+
+		<!--
+			修改日期格式
+		-->
+
+		<br /><br /><br /><br />
+		<p>修改日期格式</p>
+		<input class="easyui-datebox" type="text" />
+
+		<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser,required:true"></input>
+
+		<script type="text/javascript">
+			function myformatter(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				var d = date.getDate();
+				return y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
+			}
+
+			function myparser(s) {
+				if(!s) return new Date();
+				var ss = (s.split('-'));
+				var y = parseInt(ss[0], 10);
+				var m = parseInt(ss[1], 10);
+				var d = parseInt(ss[2], 10);
+				if(!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+					return new Date(y, m - 1, d);
+				} else {
+					return new Date();
+				}
+			}
+		</script>
+
+		<br /><br /><br /><br />
+		<p>限定选择的日期</p>
+		<input id="dd" type="text" />
+		<script type="text/javascript">
+			$(function() {
+				$("#dd").datebox({
+					required: true
+				});
+				$("#dd").datebox().datebox("calendar").calendar({
+					validator: function(date) {
+						var now = new Date();
+						return date > now;
+					}
+				})
+			})
+		</script>
+
+		<br /><br /><br /><br />
+		<p>显示时分秒</p>
+		<input class="easyui-datetimebox" required style="width:200px">
+
+		<br /><br /><br /><br />
+		<p>赋值与取值</p>
+		<input id="dd2" class="easyui-datetimebox" required style="width:300px">
+		<input type="button" value="赋值" onclick="$('#dd2').datetimebox('setValue','2017-09-10 10:09:10')" />
+		<input type="button" value="取值" onclick="alert($('#dd2').datetimebox('getValue'))" />
+	</body>
+
+</html>

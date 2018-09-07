@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			width: 200px(对应横向);
+			mode:'v'表示竖
+			showTip:true提示
+			rule:[0,'|',25,'|',50,'|',75,'|',100]标尺
+			min:50,max:95最大最小
+			
+			tipFormatter:function(value){
+					return value+'%'
+			}设置提示值
+			
+			$('#ss').slider('getValue')获取值
+			启用禁用
+			
+			
+		-->
+		<div style="margin-left: 50px;">
+			<input id="ss" class="easyui-slider" style="height: 200px;" data-options="showTip:true,rule:[0,'|',25,'|',50,'|',75,'|',100],
+				min:50,max:95,mode:'v',tipFormatter:function(value){
+					return value+'%'
+				}" />
+		</div>
+		<br />
+		<input type="button" value="取值" onclick="alert($('#ss').slider('getValue'))" />
+		<input type="button" value="禁用" onclick="$('#ss').slider('disable')" />
+		<input type="button" value="启用" onclick="$('#ss').slider('enable')" />
+		<br /><br /><br />
+		<input id="ss2" />
+		<span id="span"></span>
+		<script type="text/javascript">
+			$(function() {
+				$("#ss2").slider({
+					onChange: function(v) {
+						$("#span").html(v);
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

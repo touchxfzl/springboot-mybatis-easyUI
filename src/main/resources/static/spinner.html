@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			最大最小
+			不可编辑
+			微调幅度
+		-->
+		<p>数字微调</p>
+		<input class="easyui-numberspinner" style="width: 20%;" data-options="min:0,max:100,increment:10,editable:false" />
+
+		<!--
+			赋值
+			取值
+			禁用
+			启用
+		-->
+		<p>时间微调</p>
+		<input id="dd" class="easyui-timespinner" style="width: 20%;" data-options="min:'20:20',max:'22:22'" />
+		<input type="button" value="赋值" onclick="$('#dd').timespinner('setValue','21:21')" />
+		<input type="button" value="取值" onclick="alert($('#dd').timespinner('getValue'))" />
+		<input type="button" value="禁用" onclick="$('#dd').timespinner('disable')" />
+		<input type="button" value="启用" onclick="$('#dd').timespinner('enable')" />
+
+		<p>日期时间微调</p>
+		<input class="easyui-datetimespinner" style="width: 20%;" data-options="icons:[{
+		iconCls:'icon-clear',
+		handler:function(e){
+			$(e.data.target).datetimespinner('clear')}
+		
+		}]" />
+	</body>
+
+</html>
