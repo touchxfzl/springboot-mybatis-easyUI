@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+	<body>
+		<form id="ff" action="http://localhost:8080/form" method="post">
+			Name:<input class="easyui-textbox" name="name" data-options = "required:true" /><br />
+			birthday:<input class="easyui-datebox" name="birthday" /><br />
+			language:<select name="lang" class="easyui-combobox" style="width: 50px;">
+				<option value="java">java</option>
+				<option value="php">php</option>
+				<option value="c">c</option>
+			</select>
+		</form>
+		<a href="#" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+		<a href="#" class="easyui-linkbutton" onclick="$('#ff').form('clear')">清空</a>
+		<a href="#" class="easyui-linkbutton" onclick="$('#ff').form('reset')">重置</a>
+		<script type="text/javascript">
+			/**
+			 * 赋值
+			 */
+			$(function(){
+				$("#ff").form("load",{
+					name:"name2",
+					birthday:"03/3/2017",
+					lang:"c"
+				})
+			})
+			function submitForm(){
+				/**
+				 * 校验
+				 */
+//				if($('#ff').form("enableValidation").form("validate")){
+//					$("#ff").submit();
+//				}
+					
+				/**
+				 * return判断是否提交
+				 */
+				$("#ff").form("submit",{
+					onSubmit:function(){
+						alert("提交了");
+//						return false;
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

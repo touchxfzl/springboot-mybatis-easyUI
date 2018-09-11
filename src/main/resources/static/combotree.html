@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<!--引入基本库-->
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="jquery-easyui-1.5.5.4/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/default/easyui.css" />
+		<link rel="stylesheet" href="jquery-easyui-1.5.5.4/themes/icon.css" />
+	</head>
+
+	<body>
+		<!--
+			url:'http://localhost:8080/getTree',路径
+			method:'post',请求方式
+			multiple:true,多选
+			cascadeCheck:false，级联
+		-->
+		<input type="button" value="启用" onclick="$('#cc').combotree('enable')" />
+		<input type="button" value="禁用" onclick="$('#cc').combotree('disable')" />
+		<input type="button" value="取值" onclick="alert($('#cc').combotree('getValues'))" />
+		<input type="button" value="赋值" onclick="$('#cc').combotree('setValues',[1,2])" />
+
+		<div id="cc" class="easyui-combotree" data-options="url:'http://localhost:8080/getTree',method:'post',multiple:true,cascadeCheck:false"></div>
+	</body>
+
+</html>
