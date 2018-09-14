@@ -13,6 +13,61 @@
 	</head>
 
 	<body>
+		<p>复选框</p>
+		<p>toolbar远程加载</p>
+		<p>checkOnSelect:false点击不选中</p>
+		<p>selectOnCheck:false,点击复选框但是不选中行</p>
+		<input type="button" onclick="getCheckedtest()" value="获取复选框的值" />
+		<input type="button" onclick="getSelectedtest()" value="获取选择的值（单选）" />
+		<input type="button" onclick="getSelectionstest()" value="获取选中的值（多选）" />
+		<input type="button" onclick="$('#datag').datagrid('clearChecked')" value="清除选中行" />
+		<input type="button" onclick="$('#datag').datagrid('selectAll')" value="选中所有行" />
+		<input type="button" onclick="$('#datag').datagrid('unselectAll')" value="取消选中" />
+		<input type="button" onclick="$('#datag').datagrid('load',{order:'desc'})" value="reload停留本页，load首页" />
+		<!--order是参数-->
+		<script type="text/javascript">
+			function getCheckedtest() {
+
+				var checkedRow = $("#datag").datagrid("getChecked");
+				for(var i = 0; i < checkedRow.length; i++) {
+					alert(checkedRow[i].name);
+				}
+			}
+
+			/*一般设置单选后再使用该方法，否则选择多个只是获取到一个的值
+			 singleSelect: true, 
+			 * 
+			 * */
+			function getSelectedtest() {
+				var selected = $("#datag").datagrid("getSelected");
+				alert(selected.name)
+			}
+
+			function getSelectionstest() {
+				var selecttions = $("#datag").datagrid("getSelections");
+				alert(selecttions.length);
+				for(var i = 0; i < selecttions.length; i++) {
+					alert(selecttions[i].name);
+				}
+			}
+		</script>
+		<table id="datag" class="easyui-datagrid" data-options="toolbar:'#tb',checkOnSelect:false,selectOnCheck:false,url:'http://localhost:8080/category',method:'post'">
+			<thead>
+				<!--复选框-->
+				<tr>
+					<th field="ck" checkbox="true"></th>
+					<th field="id">ID</th>
+					<th field="name">分类</th>
+				</tr>
+			</thead>
+		</table>
+		<!--toolbar远程加载-->
+		<div id="tb">
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">Add</a>
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cut',plain:true">Cut</a>
+		</div>
+
+		<br /><br /><br /><br />
 
 		<table id="dg" style="width: 400px;height: auto;">
 
@@ -42,6 +97,25 @@
 							}
 						}
 					]
+				],
+				toolbar: [{
+						<!--弹出add-->
+						text: 'Add',
+						iconCls: 'icon-add',
+						handler: function() {
+							alert('add')
+						}
+					},
+					<!--分割线-->
+					'-',
+					<!--弹出cut-->
+					{
+						text: 'Cut',
+						iconCls: 'icon-cut',
+						handler: function() {
+							alert('cut')
+						}
+					}
 				]
 
 			})
@@ -49,7 +123,22 @@
 
 		<br /><br /><br /><br /><br />
 
-		<table class="easyui-datagrid" data-options="url:'http://localhost:8080/category',method:'post'">
+		<table class="easyui-datagrid" data-options=" toolbar:[
+			{
+				<!--弹出add-->
+				text:'Add',iconCls:'icon-add',handler:function(){
+					alert('add')
+				}
+			},
+			<!--分割线-->
+			'-',
+			<!--弹出cut-->
+			{
+				text:'Cut',iconCls:'icon-cut',handler:function(){
+					alert('cut')
+				}
+			}
+		],url:'http://localhost:8080/category',method:'post'">
 			<thead>
 				<tr>
 					<th field="id">ID</th>
@@ -123,73 +212,29 @@
 			</tbody>
 		</table>
 
-		<br /><br /><br /><br /><br />
-		<table class="easyui-datagrid" style="width: 400px;height: auto;">
-			<thead>
-				<tr>
-					<th field="name1" rowspan="2">col 1</th>
-					<th field="name2" rowspan="2">col 1</th>
-					<th field="name3" rowspan="2">col 1</th>
-					<th colspan="3">col 6</th>
-				</tr>
-				<tr>
-					<th field="name4">col 4</th>
-					<th field="name5">col 5</th>
-					<th field="name6">col 6</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
-				<tr>
-					<td>data 1</td>
-					<td>data 2</td>
-					<td>data 3</td>
-					<td>data 4</td>
-					<td>data 5</td>
-					<td>data 6</td>
-				</tr>
+		<table id="datatable">
 
-			</tbody>
 		</table>
+		<script type="text/javascript">
+			$("#datatable").datagrid({
+				data: [{
+					f1: 'value1',
+					f2: 'value2'
+				}, {
+					f1: 'value1',
+					f2: 'value2'
+				}],
+				columns: [
+					[
+					{
+						field:'f1',title:'第一列'
+					},{
+						field:'f1',title:'第二列'
+					}]
+				]
+			})
+		</script>
+
 	</body>
 
 </html>
